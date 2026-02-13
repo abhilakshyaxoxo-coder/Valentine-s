@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Cutr Pihu</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-pink: #fff0f3;
+            --dark-red: #c9184a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--soft-pink);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: var(--dark-red);
+        }
+
+        /* Floating Hearts Background */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Main Card */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            z-index: 1;
+            max-width: 400px;
+            border: 2px solid var(--primary-pink);
+            animation: fadeIn 2s ease-in;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        h2 { font-weight: 300; font-style: italic; }
+        p { line-height: 1.6; font-size: 1.1rem; }
+
+        .btn {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: var(--dark-red);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: var(--primary-pink);
+            opacity: 0.6;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heartContainer"></div>
+
+    <div class="card">
+        <h1>Happy Valentine's Day!</h1>
+        <h2>To my Pihu ❤️</h2>
+        <p>
+            To my beautiful <strong>Wifu</strong> and the one I call 
+            <strong>"Cutr"</strong>—you are the heartbeat of my life. 
+            Thank you for being mine today and always.
+        </p>
+        <button class="btn" onclick="showSurprise()">Click for a Surprise</button>
+        <p id="surpriseText" style="margin-top: 15px; font-weight: bold; display: none;">
+            I love you more than all the stars in the sky! 🌟
+        </p>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            
+            document.getElementById('heartContainer').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+
+        function showSurprise() {
+            const text = document.getElementById('surpriseText');
+            text.style.display = 'block';
+            text.style.animation = 'fadeIn 1s ease-in';
+            
+            // Add extra hearts when clicked
+            for(let i=0; i<15; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
